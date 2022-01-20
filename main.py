@@ -43,12 +43,12 @@ def login_inst(instagram_username, inst_password):
 
 
 def comment_inst():
-    driver.find_element_by_css_selector('#react-root > section > main > div > div.ltEKP > article > '
-                                        'div.eo2As > section.ltpMr.Slqrh > span._15y0l > button').click()
+    driver.find_element_by_xpath(
+        '//*[@id="react-root"]/section/main/div/div[1]/article/div/div[2]/div/div[2]/section[1]/span[2]/button').click()
+
     sleep(0.2)
 
-    text_input = driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[1]/article/div['
-                                              '3]/section[3]/div/form/textarea')
+    text_input = driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[1]/article/div/div[2]/div/div[2]/section[3]/div/form/textarea')
     text_input.send_keys('yo' + Keys.ENTER)
     sleep(5)
 
@@ -62,12 +62,11 @@ def reload_page(page):
 
 def check_active_comment_box_inst(page):
     wait.until(
-        presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/main/div/div[1]/article/div[2]')))
+        presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/main/div/div[1]/article/div/div[1]/div/div/div[2]')))
 
     def check():
         try:
-            driver.find_element_by_css_selector('#react-root > section > main > div > div.ltEKP > article > '
-                                                'div.eo2As > section.ltpMr.Slqrh > span._15y0l > button').click()
+            driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[1]/article/div/div[2]/div/div[2]/section[1]/span[2]/button').click()
             return True
         except NoSuchElementException:
             return False
@@ -85,8 +84,6 @@ def check_active_comment_box_inst(page):
 
 
 new_options = Options()
-new_options.page_load_strategy = 'eager'
-
 driver: WebDriver = Opera(executable_path=r'C:/Users/Benjamin/Documents/operadriver/operadriver.exe',
                           options=new_options)
 
@@ -96,7 +93,7 @@ wait = WebDriverWait(driver, 20, poll_frequency=1,
 
 load_inst()
 login_inst('BenjaminGarridoG', 'Dayex23596')
-load_publication_inst('https://www.instagram.com/p/CUI_8DuLMot/')
-check_active_comment_box_inst('https://www.instagram.com/p/CUI_8DuLMot/')
+load_publication_inst('https://www.instagram.com/p/CGLVt_cFp6v/')
+check_active_comment_box_inst('https://www.instagram.com/p/CGLVt_cFp6v/')
 
 driver.close()
